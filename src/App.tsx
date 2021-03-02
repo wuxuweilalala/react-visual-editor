@@ -1,5 +1,6 @@
 import {useRef, useState} from 'react';
 import {useCallbackRef} from './packages/hook/useCallbackRef';
+import {ReactVisualEditor} from './packages/ReactVisualEditor';
 
 function App() {
 
@@ -45,8 +46,7 @@ function App() {
 
   return (
     <>
-      <h1>hello world</h1>
-      <div
+      {/*<div
         style={{
           width: '50px',
           height: '50px',
@@ -57,7 +57,8 @@ function App() {
         }}
         onMouseDown={moveDraggier.mousedown}
       >
-      </div>
+      </div>*/}
+      <ReactVisualEditor />
     </>
   );
 }

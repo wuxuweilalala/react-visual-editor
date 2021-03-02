@@ -1,0 +1,74 @@
+$headSize: 60px;
+$menuSize: 275px;
+$operatorSize: 275px;
+
+$ibc: #dcdfe6;
+$ibl: #ebeef5;
+$itc: #314659;
+$icc: rgba(0, 0, 0, 0.45);
+$boxShadowColor: #f0f1f2;
+
+$primary: #1890ff;
+
+.react-visual-editor {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+
+  &:before {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "";
+    background-color: rgba(black, 0.1);
+  }
+
+  .react-visual-editor-menu,
+  .react-visual-editor-head,
+  .react-visual-editor-operator,
+  .react-visual-editor-body {
+    position: absolute;
+
+    &.react-visual-editor-menu {
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: $menuSize;
+      background-color: white;
+      border-right: 1px solid $ibc;
+    }
+
+    &.react-visual-editor-head {
+      top: 0;
+      left: $menuSize;
+      right: $operatorSize;
+      height: $headSize;
+      z-index: 1;
+    }
+
+    &.react-visual-editor-operator {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: $operatorSize;
+      background-color: white;
+      border-left: 1px solid $ibc;
+    }
+
+    &.react-visual-editor-body {
+      top: 0;
+      left: $menuSize;
+      right: $operatorSize;
+      bottom: 0;
+      box-sizing: border-box;
+      padding-top: $headSize;
+      padding-bottom: 300px;
+      background-color: #f6f6f6;
+    }
+
+  }
+}
