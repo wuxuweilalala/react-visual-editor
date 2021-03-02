@@ -1,10 +1,13 @@
 import {useRef, useState} from 'react';
 import {useCallbackRef} from './packages/hook/useCallbackRef';
 import {ReactVisualEditor} from './packages/ReactVisualEditor';
+import './visual.config';
+import {visualConfig} from './visual.config';
+import {ReactVisualEditorValue} from './packages/ReactVisualEditor.utils';
 
 function App() {
 
-  const [pos, setPos] = useState({
+  /*const [pos, setPos] = useState({
     left: 0,
     top: 0
   });
@@ -42,7 +45,15 @@ function App() {
       document.removeEventListener('mouseup', mouseup);
     });
     return {mousedown};
-  })();
+  })();*/
+
+  const [editorValue,setEditorValue] = useState({
+    container:{
+      height:700,
+      width: 1000
+    },
+    blocks:[]
+  } as ReactVisualEditorValue)
 
   return (
     <>
@@ -58,7 +69,7 @@ function App() {
         onMouseDown={moveDraggier.mousedown}
       >
       </div>*/}
-      <ReactVisualEditor />
+      <ReactVisualEditor config={visualConfig} value={editorValue} onChange={setEditorValue}/>
     </>
   );
 }

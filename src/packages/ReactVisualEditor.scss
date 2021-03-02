@@ -40,6 +40,40 @@ $primary: #1890ff;
       width: $menuSize;
       background-color: white;
       border-right: 1px solid $ibc;
+      padding: 20px;
+      box-sizing: border-box;
+      .react-visual-editor-menu-item {
+        border: solid 2px  $ibc;
+        margin-bottom: 20px;
+        position: relative;
+        padding: 40px 16px 20px 16px;
+        text-align: center;
+
+        &:after {
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          content: "";
+        }
+
+        &:hover {
+          border-color: $primary;
+          cursor: move;
+        }
+
+        .react-visual-editor-menu-item-name {
+          position: absolute;
+          left: -2px;
+          top: -2px;
+          background-color: $primary;
+          color: white;
+          font-size: 12px;
+          line-height: 2em;
+          padding: 0 20px;
+        }
+      }
     }
 
     &.react-visual-editor-head {
