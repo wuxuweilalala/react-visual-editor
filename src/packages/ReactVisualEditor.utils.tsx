@@ -2,6 +2,7 @@ export interface ReactVisualEditorBlock {
   componentKey: string,
   top: number,
   left: number,
+  adjustPosition:boolean
 }
 
 export interface ReactVisualEditorValue {
@@ -34,6 +35,7 @@ export function createVisualBlock(
     componentKey:component.key,
     top,
     left,
+    adjustPosition:true
   }
 }
 

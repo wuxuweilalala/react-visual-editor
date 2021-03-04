@@ -56,17 +56,20 @@ function App() {
       {
         componentKey:'text',
         left:100,
-        top:100
+        top:100,
+        adjustPosition:false
       },
       {
         componentKey:'button',
         left:200,
-        top:200
+        top:200,
+        adjustPosition:false
       },
       {
         componentKey:'input',
         left:300,
-        top:300
+        top:300,
+        adjustPosition:false
       },
 
     ]
