@@ -49,10 +49,27 @@ function App() {
 
   const [editorValue,setEditorValue] = useState({
     container:{
-      height:700,
+      height:500,
       width: 1000
     },
-    blocks:[]
+    blocks:[
+      {
+        componentKey:'text',
+        left:100,
+        top:100
+      },
+      {
+        componentKey:'button',
+        left:200,
+        top:200
+      },
+      {
+        componentKey:'input',
+        left:300,
+        top:300
+      },
+
+    ]
   } as ReactVisualEditorValue)
 
   return (
