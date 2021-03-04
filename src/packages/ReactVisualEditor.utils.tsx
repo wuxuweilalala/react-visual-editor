@@ -19,6 +19,24 @@ export interface ReactVisualEditorComponent {
   render: () => JSX.Element
 }
 
+export function createVisualBlock(
+  {
+    left,
+    top,
+    component
+  }:{
+    left:number,
+    top:number,
+    component:ReactVisualEditorComponent
+  }
+):ReactVisualEditorBlock {
+  return {
+    componentKey:component.key,
+    top,
+    left,
+  }
+}
+
 export function createVisualConfig() {
   const componentMap:{[k:string]:ReactVisualEditorComponent } = {};
   const componentArray:ReactVisualEditorComponent[ ] = [];
