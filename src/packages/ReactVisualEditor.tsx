@@ -56,8 +56,6 @@ export const ReactVisualEditor: React.FC<{
         e.dataTransfer!.dropEffect = 'none';
       }),
       drop: useCallbackRef((e: DragEvent) => {
-        console.log('drop');
-        // @ts-ignore
         props.onChange({
           ...props.value,
           blocks: [...props.value.blocks, createVisualBlock({
@@ -80,7 +78,7 @@ export const ReactVisualEditor: React.FC<{
           props.config.componentArray.map((component, index) => (
             <div className="react-visual-editor-menu-item" key={index}
                  draggable
-                 onDragStart={e=>menuDraggier.dragstart(e,component)}
+                 onDragStart={e => menuDraggier.dragstart(e, component)}
                  onDragEnd={menuDraggier.dragend}
             >
               {component.preview()}
