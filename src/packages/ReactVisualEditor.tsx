@@ -16,19 +16,19 @@ export const ReactVisualEditor: React.FC<{
   config: ReactVisualEditorConfig
 }> = (props) => {
 
-    /**
-      * container dom对象的引用
-      * @author 邬绪威
-      * @date 2021/3/7 16:57
-      */
+  /**
+   * container dom对象的引用
+   * @author 邬绪威
+   * @date 2021/3/7 16:57
+   */
   const containerRef = useRef({} as HTMLDivElement);
 
 
-    /**
-      * container dom对象的样式
-      * @author 邬绪威
-      * @date 2021/3/7 17:10
-      */
+  /**
+   * container dom对象的样式
+   * @author 邬绪威
+   * @date 2021/3/7 17:10
+   */
   const containerStyles = useMemo(() => {
     return {
       height: `${props.value.container.height}px`,
@@ -36,48 +36,47 @@ export const ReactVisualEditor: React.FC<{
     };
   }, [props.value.container.width, props.value.container.height]);
 
-    /**
-      * 计算当前数据中，哪些block是选中的，哪些是未选中的
-      * @author 邬绪威
-      * @date 2021/3/7 17:36
-      */
-    const focusData = useMemo(()=>{
-      const focus:ReactVisualEditorBlock[] = [];
-      const unFocus:ReactVisualEditorBlock[] = [];
-      props.value.blocks.forEach(block=>{(block.focus?focus:unFocus).push(block)})
-      return {focus,unFocus}
-    },[props.value.blocks])
+  /**
+   * 计算当前数据中，哪些block是选中的，哪些是未选中的
+   * @author 邬绪威
+   * @date 2021/3/7 17:36
+   */
+  const focusData = useMemo(() => {
+    const focus: ReactVisualEditorBlock[] = [];
+    const unFocus: ReactVisualEditorBlock[] = [];
+    props.value.blocks.forEach(block => {(block.focus ? focus : unFocus).push(block);});
+    return {focus, unFocus};
+  }, [props.value.blocks]);
 
+  /**
+   * 对外暴露的方法
+   * @author 邬绪威
+   * @date 2021/3/7 17:31
+   */
+  const methods = {
     /**
-      * 对外暴露的方法
-      * @author 邬绪威
-      * @date 2021/3/7 17:31
-      */
-
-    const methods = {
-        /**
-          * 更新blocks，触发重新渲染
-          * @author 邬绪威
-          * @date 2021/3/7 17:40
-          */
-      updateBlocks:(blocks:ReactVisualEditorBlock[])=>{props.onChange({...props.value,blocks:[...blocks]})},
-        /**
-          * 清空选中的元素
-          * @author 邬绪威
-          * @date 2021/3/7 17:40
-          */
-      clearFocus:(external?:ReactVisualEditorBlock)=> {
-        (!!external ? focusData.focus.filter(item=>item!==external) : focusData.focus).forEach(block=>block.focus=false)
-          methods.updateBlocks(props.value.blocks)
-      }
+     * 更新blocks，触发重新渲染
+     * @author 邬绪威
+     * @date 2021/3/7 17:40
+     */
+    updateBlocks: (blocks: ReactVisualEditorBlock[]) => {props.onChange({...props.value, blocks: [...blocks]});},
+    /**
+     * 清空选中的元素
+     * @author 邬绪威
+     * @date 2021/3/7 17:40
+     */
+    clearFocus: (external?: ReactVisualEditorBlock) => {
+      (!!external ? focusData.focus.filter(item => item !== external) : focusData.focus).forEach(block => block.focus = false);
+      methods.updateBlocks(props.value.blocks);
     }
+  };
 
 
   /**
-    * 拖拽处理逻辑， 处理从menu菜单中拖拽预定义的组件到容器中
-    * @author 邬绪威
-    * @date 2021/3/7 17:10
-    */
+   * 拖拽处理逻辑， 处理从menu菜单中拖拽预定义的组件到容器中
+   * @author 邬绪威
+   * @date 2021/3/7 17:10
+   */
   const menuDraggier = (() => {
 
     const dragData = useRef({
@@ -123,36 +122,35 @@ export const ReactVisualEditor: React.FC<{
     return block;
 
   })();
-    /**
-      * 处理 block 元素的选中逻辑
-      * @author 邬绪威
-      * @date 2021/3/7 17:12
-      */
-  const focusHandler = (()=>{
-    const block = (e:React.MouseEvent<HTMLDivElement>,block:ReactVisualEditorBlock) => {
-      if(e.shiftKey) {
+  /**
+   * 处理 block 元素的选中逻辑
+   * @author 邬绪威
+   * @date 2021/3/7 17:12
+   */
+  const focusHandler = (() => {
+    const block = (e: React.MouseEvent<HTMLDivElement>, block: ReactVisualEditorBlock) => {
+      if (e.shiftKey) {
         /*如果摁住了shift键，如果此时没有选中的block，就选中这个block，否则令这个block的选中状态取反*/
-        if(focusData.focus.length <=1 ) {
-          block.focus = true
-        }else {
-          block.focus = !block.focus
+        if (focusData.focus.length <= 1) {
+          block.focus = true;
+        } else {
+          block.focus = !block.focus;
         }
-        methods.updateBlocks(props.value.blocks)
-      }else {
+        methods.updateBlocks(props.value.blocks);
+      } else {
         /*如果点击的这个block没有被选中，才清空其他选中的block。否则不做任何事情。*/
-        if(!block.focus) {
-          block.focus = true
-          methods.clearFocus(block)
+        if (!block.focus) {
+          block.focus = true;
+          methods.clearFocus(block);
         }
       }
-    }
+    };
 
-    const container = (e:React.MouseEvent<HTMLDivElement>) => {
-      if(e.target !== e.currentTarget) {return}
-      if(!e.shiftKey) {methods.clearFocus()}
-      console.log('container 点击了');
-    }
-    return {block,container}
+    const container = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.target !== e.currentTarget) {return;}
+      if (!e.shiftKey) {methods.clearFocus();}
+    };
+    return {block, container};
 
   })();
 
@@ -187,7 +185,7 @@ export const ReactVisualEditor: React.FC<{
                 <ReactVisualBlock
                   block={block}
                   key={index}
-                  onMouseDown={e=>focusHandler.block(e,block)}
+                  onMouseDown={e => focusHandler.block(e, block)}
                   config={props.config}
                 />
               )
